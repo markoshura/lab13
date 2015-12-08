@@ -224,10 +224,10 @@ class SimpleTests(TestCase):
         # выполняем некорректное матричное умножением и проверяем,
         # что генерируется исключение
 
-        with self.assertRaises(RuntimeError):
+        with self.assertRaises((RuntimeError, ValueError)):
             Matrix(1, 2) * Matrix(1, 2)
 
-        with self.assertRaises(RuntimeError):
+        with self.assertRaises((RuntimeError, ValueError)):
             Matrix(2, 2) * Matrix(1, 2)
 
 
@@ -253,18 +253,18 @@ class NotSoSimpleTests(TestCase):
         ])
 
         self.assertEqual(m.get(0, 0), 1)
-        self.assertEqual(m.get(0, 1), 2)
-        self.assertEqual(m.get(0, 2), 3)
-        self.assertEqual(m.get(1, 0), 4)
+        self.assertEqual(m.get(1, 0), 2)
+        self.assertEqual(m.get(2, 0), 3)
+        self.assertEqual(m.get(0, 1), 4)
         self.assertEqual(m.get(1, 1), 5)
-        self.assertEqual(m.get(1, 2), 6)
+        self.assertEqual(m.get(2, 1), 6)
 
     def testMatrixCompareWithWrongSizes(self):
         """Сравнение матриц разного размера"""
 
         # пытаемся сравнить матрицы разного размера и проверям,
         # что генерируется исключение
-        with self.assertRaises(RuntimeError):
+        with self.assertRaises((RuntimeError, ValueError)):
             Matrix(1, 1) == Matrix(2, 2)
 
     def testDeterminant(self):
@@ -272,10 +272,10 @@ class NotSoSimpleTests(TestCase):
 
         # проверяем, что попытка вычислить определитель для прямоугольной матрицы
         # приводит к генерации исключения
-        with self.assertRaises(RuntimeError):
+        with self.assertRaises((RuntimeError, ValueError)):
             Matrix(1, 2).determinant()
 
-        with self.assertRaises(RuntimeError):
+        with self.assertRaises((RuntimeError, ValueError)):
             Matrix(2, 1).determinant()
 
         # вычисляем определитель и проверяем результат
@@ -321,3 +321,4 @@ class NotSoSimpleTests(TestCase):
 
 if __name__ == "__main__":
     main()
+
