@@ -1,5 +1,5 @@
 class Matrix:
-    def __init__(self, *ems):#THE VALUES ARE STORED AS IF THEY WERE PRINTED
+    def __init__(self, *ems):
         if len(ems) == 0: raise ValueError('Not enough parameters')
         if type(ems[0]) not in [list, tuple]:
             if len(ems) != 2:
